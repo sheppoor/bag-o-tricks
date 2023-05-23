@@ -18,7 +18,7 @@ FF=Gecko, Safari=Webkit, Chrome=Blink
 
 ### VSCode plugin essentials
 
-This list doesn't include project stack from extension packs such as Angular or Java.
+This list doesn't include project stack from extension packs such as Angular and Java.
 
 * Regex Previewer (from Christof Marti) - great for in-line quick testing, unit test creation
 * Dependency Analytics (from RedHat) - specific to Java projects but not in the extension pack
@@ -29,7 +29,7 @@ This list doesn't include project stack from extension packs such as Angular or 
 * Thunder Client (from Ranga Vahineni) - Like postman but integrated
 * vscode-pdf (from tomoki207) - basic in-line viewer
 * markdownlint (from David Anson)
-* Code Spell Checker (from Street Side Software) - personal choice, can get in the way
+* Code Spell Checker (from Street Side Software) - personal choice, can get in the way but much better than the alternatives
 
 Specialized / depending on project:
 
@@ -40,14 +40,14 @@ Specialized / depending on project:
 Missing:
 
 * A better hex editor
-* A column mode editor tool
+* A column mode editor tool - old school editors (UltraEdit for example) were better and feature complete for dealing with fixed position files.
 * I hate all the color pickers, need a good one that's not external to VSCode.
 
 ### VSCode customizations
 
 All my standard changes to the `settings.json` file
 
-`TODO` look up what I've done before
+*`TODO` look up what I've done before and add it here*
 
 ### External to VSCode
 
@@ -107,12 +107,14 @@ Notes: Single quote forced standard is overkill. curly brace spacing off for imp
 ## RegEx
 
 * <https://cheatography.com/davechild/cheat-sheets/regular-expressions/> - Favorite quick cheatsheet
-
 * <https://regex101.com/> - excellent testing site. Has a quick ref. Also, constructs an explanation in plain English. Also has a unit test construction, but I find VSCode plugins better. Also has a library, but I find it lacking.
-
 * <https://www.regexlib.com> - better regex library, but still not great.
 
-More `TODO`, find better library resources.
+Specific formulas
+
+* `\d{1,7}-\d{2}-\d$` - CAS numbers. Note the check digit is incorrect in some official numbers so it can't always be considered reliable.
+
+*More `TODO`, find better library resources, add some of my personal creations.*
 
 ## Markdown
 
@@ -121,12 +123,12 @@ By far my favorite quick reference - so clean, so accessible. Covers all the bas
 
 Markdown flavors and some notes:
 
-* *[Github](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks) - language-specific code highlight with triple backtick wrapper, with the open followed by the language name.
+* [Github](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks) - language-specific code highlight with triple backtick wrapper, with the open followed by the language name.
 * [WikiText](https://en.wikipedia.org/wiki/Help:Wikitext) for Wikipedia
 * [SharePoint](https://learn.microsoft.com/en-us/contribute/markdown-referencehttps://learn.microsoft.com/en-us/contribute/markdown-reference) which is most non-compliant. Strikeout requires `<s>` html. Don't try links to images and SharePoint resources, breaks too frequently, but external web is fine.
 * [Pure markdown](https://daringfireball.net/projects/markdown/syntax) original spec
 
- *TODO: There is no definitive source that clearly marks the difference between the major markups. Low priority.*
+ *`TODO` There is no definitive source that clearly marks the difference between the major markups. Low priority.*
 
 ## SQL
 
@@ -166,11 +168,10 @@ CREATE TABLE my_table (
 Typical Alter
 
 ```SQL
-	ALTER TABLE my_table ADD new_col_name VARCHAR(50) NULL;
+ALTER TABLE my_table ADD new_col_name VARCHAR(50) NULL;
 ```
 
-
-How to drop all tables. Builds a script, doesn't actually auto-run.
+How to drop all tables. Builds a script, doesn't actually auto-run. Much safer alternative.
 
 ```SQL
 USE information_schema;
@@ -189,17 +190,17 @@ WHERE t1.count_of_empty_ids > 0;
 
 Date/Time
 
-* Don't use SYSDATE(), use NOW(). Problem: SYSDATE() will execute upon each use, NOW() is single execute.
-* SELECT YEAR(SYSDATE())
-* SELECT SYSDATE() - this is the at-the-moment system date/time, can fire n times in a single query
-* SELECT DATETIME() - Same as sysdate but only fires once for the query. Get the same date/time for multiple inserts or rows.
-* SELECT CURTIME()
-* SELECT DATEDIFF(DATE(FLOOR(SYSDATE())),'2000-01-01'); - days since a date
+* Don't use `SYSDATE()`, use `NOW()`. Problem: `SYSDATE()` will execute upon each use, `NOW()` is single execute.
+* `SELECT YEAR(SYSDATE())`
+* `SELECT SYSDATE()` - this is the at-the-moment system date/time, can fire n times in a single query
+* `SELECT DATETIME()` - Same as sysdate but only fires once for the query. Get the same date/time for multiple inserts or rows.
+* `SELECT CURTIME()`
+* `SELECT DATEDIFF(DATE(FLOOR(SYSDATE())),'2000-01-01');` - days since a date
 
 Other cool stuff
 
-* SELECT LEAST(NULL,500); 
-* SELECT LAST_INSERT_ID(); - most recent inserted ID from an auto increment
+* `SELECT LEAST(NULL,500);`
+* `SELECT LAST_INSERT_ID();` - most recent inserted ID from an auto increment
 
 -- # of rows that would have been returned if there was no "limit". Follow-up query.
 SELECT user_id
@@ -209,52 +210,51 @@ SELECT FOUND_ROWS();
 
 <https://cheatography.com/davechild/cheat-sheets/mysql/> - mostly for type definitions and fn names
 
+*`TODO` adding indexes, other data types (blobs in particular), foreign constraints, full text search example or reference. Plus I have a snipit cache somewhere, add it*
+
 ### Microsoft SQL Server
 
-<https://cheatography.com/davechild/cheat-sheets/sql-server/> - terrible cheatsheet, but a start
+* <https://cheatography.com/davechild/cheat-sheets/sql-server/> - terrible cheatsheet, but a start
+
+*`TODO` scripted conversion from MySql code to add*
 
 ### Oracle
 
-
-
-
-
-
-SELECT @row := @row + 1 AS ROW, t.*
-FROM site_user t, (SELECT @row := 0) r
-
 Converting Oracle into mySql: "Create Table" statements (specific need)
 
-* Zap any database name such as from table
+* Zap any database name e.g., database_name.table_name --> table_name
 * replace "prompt" with "--"
 * For primary key, often replace NUMBER with AUTO_INCREMENT
-* "NUMBER" --> "INT"
+* `NUMBER` --> `INT`
   * Watch out for embedded "NUMBER" text in fields.
   * Some like NUMBER(1) need to be TINYINT(1)
-* VARCHAR2 --> VARCHAR
-* "DATE DEFAULT SYSDATE" --> "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
-* Add "PRIMARY_KEY(<field_name>)"
-* append: ENGINE=INNODB DEFAULT CHARSET=utf8
+* `VARCHAR2` --> `VARCHAR`
+* `DATE DEFAULT SYSDATE` --> `TIMESTAMP DEFAULT CURRENT_TIMESTAMP`
+* Add `PRIMARY_KEY(<field_name>)`
+* append `ENGINE=INNODB DEFAULT CHARSET=utf8`
 
 Converting Oracle insert statements to mySql (also very specific need)
 
 * Watch out for reserved words. e.g., change " name, " to " `name`, "
 * Zap the date inserts.
-  * Search Mask, w/ unix regex: to_date\('\d\d-\d\d-\d\d\d\d \d\d:\d\d:\d\d', 'dd-mm-yyyy hh24:mi:ss'\)
+  * Search Mask, w/ unix regex: `to_date('\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}', 'dd-mm-yyyy hh24:mi:ss')`
   * Set it to null or now().
 
 Cool Oracle Stuff
 
 * If you add a comment into your select statement of "/*csv*/" and run as a script (important!) then it will output CSV strings!
-  * select /*csv*/ field1, field2 from table;
+  * `select /*csv*/ field1, field2 from table;`
 * To insert a single quote, just quote the quote. 
   * 'The school''s name is ''My High School'' and that''s it.'
 * To insert a "&", it can be escaped with a "\". However I've has some trouble with this. Only a problem in sqlPlus or sqlDeveloper.
-  * To turn off the feature of using "&" for variables, run "SET DEF OFF;" then run the insert or update query.
+  * To turn off the feature of using "&" for variables, run `SET DEF OFF;` then run the insert or update query.
+
+SELECT @row := @row + 1 AS ROW, t.*
+FROM site_user t, (SELECT @row := 0) r
 
 ### SQLite
 
-<https://cheatography.com/richardjh/cheat-sheets/sqlite3/> - command line
+* <https://cheatography.com/richardjh/cheat-sheets/sqlite3/> - command line
 
 ## Javascript
 
@@ -272,7 +272,7 @@ Moved on to modern ECMAScript, leaving all the old workarounds behind (all remov
 
 ### Snipits
 
-`TODO`
+*`TODO` so many to add...*
 
 <!--
 Find all attributes for a js obs
@@ -294,7 +294,7 @@ myobj.each(obj.attributes, function(i, attr){
 
 ### Chrome
 
-Open multiple instances of Chrome each with an independent profile. Much more powerful than just adding an incognito window. Replace `homedir` and `profilename` as appropriate.
+Open multiple instances of Chrome each with an independent profile. Underutilized feature in my opinion. Much more powerful than just adding an incognito window. Replace `homedir` and `profilename` as appropriate.
 
 ```bash
 /usr/bin/google-chrome-stable --user-data-dir="/home/homedir/chrome/profilename" &
@@ -303,23 +303,22 @@ Open multiple instances of Chrome each with an independent profile. Much more po
 
 ### Git
 
-<https://cheatography.com/samcollett/cheat-sheets/git/> - I don't love this cheatsheet, I think we can do better
-
-<https://git-scm.com/book/en/v2> - Great book to learn Git, and then serves as a reference. Older but all still applicable. CC-NC-SA
+* <https://cheatography.com/samcollett/cheat-sheets/git/> - I don't love this cheatsheet, I think we can do better
+* <https://git-scm.com/book/en/v2> - Great book to learn Git, and then serves as a reference. Older but all still applicable. CC-NC-SA
 
 ### Bootstrap
 
-<https://cheatography.com/masonjo/cheat-sheets/bootstrap/> - cheatsheet kinda sucks, would like to make my own. The world needs a 1-page ref sheet.
+* <https://cheatography.com/masonjo/cheat-sheets/bootstrap/> - cheatsheet kinda sucks, would like to make my own. The world needs a 1-page ref sheet.
 
 ### CRON
 
-<https://quickref.me/cron> - shockingly complete
+* <https://quickref.me/cron> - shockingly complete
 
 ### Excel functions
 
 I'm sick of Excel, but it's a reality in business. So many ETL processes still need to go through Excel because that's where the client starts.
 
-[Convert Excel to JSON](https://codebeautify.org/excel-to-json) - nice tool, want to build my own some day with specific features
+[Convert Excel to JSON](https://codebeautify.org/excel-to-json) - nice tool, want to build my own some day with specific enhanced and integrated features
 
 <!--
 Date field into mySql date format
