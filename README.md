@@ -28,9 +28,13 @@ FF=Gecko, Safari=Webkit, Chrome=Blink
 * <https://regex101.com/> - excellent testing site. Has a quick ref. Also, constructs an explanation in plain English. Also has a unit test construction, but I find VSCode plugins better. Also has a library, but I find it lacking.
 * <https://www.regexlib.com> - better regex library, but still not great.
 
-Specific formulas
+### Specific formulas
 
-* `\d{1,7}-\d{2}-\d$` - CAS numbers. Note the check digit is incorrect in some official numbers so it can't always be considered reliable.
+* CAS numbers. Note the check digit is incorrect in some official numbers so it can't always be considered reliable.
+
+```regex
+\d{1,7}-\d{2}-\d$
+```
 
 *More `TODO`, find better library resources, add some of my personal creations.*
 
